@@ -2,90 +2,577 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Mohammad Khaled | Web Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;800&family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --bg: #050505;
-            --primary: #0ea5e9; 
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --primary-light: #38bdf8;
             --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.1);
             --text: #e0e0e0;
             --text-muted: #999999;
             --card-title: #ffffff;
-            --nav-bg: rgba(5, 5, 5, 0.85);
+            --nav-bg: rgba(5, 5, 5, 0.92);
             --glow-1: rgba(14, 165, 233, 0.05);
             --glow-2: rgba(14, 165, 233, 0.02);
             --hero-name-start: #ffffff;
-            --hero-name-end: #888888;
+            --hero-name-end: #cbd5e1;
             --hero-sub-start: #0ea5e9;
-            --hero-sub-end: #ffffff;
-            --btn-hover: rgba(14, 165, 233, 0.05);
+            --hero-sub-end: #f1f5f9;
+            --btn-hover: rgba(14, 165, 233, 0.08);
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         [data-theme="light"] {
             --bg: #f8fafc;
-            --primary: #0ea5e9; 
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --primary-light: #38bdf8;
             --glass: rgba(255, 255, 255, 0.8);
-            --glass-border: rgba(14, 165, 233, 0.15);
-            --text: #334155;
-            --text-muted: #64748b;
+            --glass-border: rgba(14, 165, 233, 0.2);
+            --text: #1e293b;
+            --text-muted: #475569;
             --card-title: #0f172a;
-            --nav-bg: rgba(248, 250, 252, 0.85);
+            --nav-bg: rgba(248, 250, 252, 0.95);
             --glow-1: rgba(14, 165, 233, 0.06);
-            --glow-2: rgba(14, 165, 233, 0.03);
+            --glow-2: rgba(14, 165, 233, 0.02);
             --hero-name-start: #0f172a;
-            --hero-name-end: #475569;
+            --hero-name-end: #334155;
             --hero-sub-start: #0ea5e9;
             --hero-sub-end: #0f172a;
-            --btn-hover: rgba(14, 165, 233, 0.08);
+            --btn-hover: rgba(14, 165, 233, 0.12);
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.05);
         }
 
-        * { box-sizing: border-box; transition: background-color 0.4s ease, color 0.4s ease, transform 0.3s ease, border-color 0.3s ease; scroll-behavior: smooth; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
-        .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, var(--glow-2) 0%, transparent 50%), radial-gradient(circle at 10% 10%, var(--glow-1) 0%, transparent 40%); z-index: -1; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        nav { position: fixed; top: 0; width: 100%; padding: 15px 0; background: var(--nav-bg); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid var(--glass-border); }
-        nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Fira Code', monospace; font-weight: 800; color: var(--primary); text-decoration: none; font-size: 1.1rem; }
-        .nav-menu { display: flex; align-items: center; list-style: none; gap: 25px; margin: 0; padding: 0; }
-        .nav-menu li a { text-decoration: none; color: var(--text); font-family: 'Fira Code', monospace; font-size: 0.85rem; }
-        .nav-menu li a:hover { color: var(--primary); }
-        .theme-toggle { background: transparent; border: none; color: var(--text); font-size: 1.1rem; cursor: pointer; padding: 5px; }
-        .theme-toggle:hover { color: var(--primary); }
-        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-top: 80px; }
-        .dev-tag { font-family: 'Fira Code', monospace; color: var(--primary); font-size: 1rem; margin-bottom: 10px; }
-        h1 { font-size: clamp(2.2rem, 7vw, 4.2rem); margin: 0; font-weight: 800; background: linear-gradient(to right, var(--hero-name-start), var(--hero-name-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1; }
-        h2.hero-sub { font-size: clamp(1.3rem, 4vw, 2.3rem); margin: 12px 0 25px 0; font-weight: 700; background: linear-gradient(to right, var(--hero-sub-start), var(--hero-sub-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .description { max-width: 600px; font-size: 1rem; color: var(--text-muted); line-height: 1.7; }
-        .section-title { font-size: 1.8rem; margin: 80px 0 40px; display: flex; align-items: center; gap: 15px; color: var(--card-title); }
-        .section-title::after { content: ""; height: 1px; flex-grow: 1; background: var(--glass-border); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .card { background: var(--glass); border: 1px solid var(--glass-border); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px); display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(14, 165, 233, 0.05); }
-        .card h3 { color: var(--card-title); margin: 15px 0 10px 0; font-family: 'Fira Code', monospace; font-size: 1.2rem; }
-        .feature-list { margin: 15px 0; padding: 0; list-style: none; font-size: 0.8rem; color: var(--primary); display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
-        .tech-stack { display: flex; gap: 8px; margin-top: auto; flex-wrap: wrap; padding-top: 15px; }
-        .tech-tag { font-size: 0.7rem; font-family: 'Fira Code', monospace; color: var(--primary); background: rgba(14, 165, 233, 0.06); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(14, 165, 233, 0.1); }
-        .btn { margin-top: 30px; padding: 12px 28px; background: transparent; border: 1px solid var(--primary); color: var(--primary); border-radius: 4px; cursor: pointer; text-decoration: none; font-family: 'Fira Code', monospace; font-size: 0.9rem; display: inline-block; }
-        .btn:hover { background: var(--btn-hover); }
-        .social-links { display: flex; justify-content: center; gap: 25px; margin-top: 30px; }
-        .social-links a { color: var(--text); font-size: 1.8rem; }
-        .social-links a:hover { color: var(--primary); }
-        footer { padding: 40px 0; text-align: center; color: var(--text-muted); font-family: 'Fira Code', monospace; font-size: 0.8rem; border-top: 1px solid var(--glass-border); }
-        .highlight { color: var(--primary); }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, var(--glow-1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 90%, var(--glow-2) 0%, transparent 60%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 16px 0;
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+            transition: 0.3s;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Fira Code', monospace;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            letter-spacing: -0.3px;
+            z-index: 1001;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 32px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: var(--text);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--primary);
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 280px;
+                height: 100vh;
+                background: var(--nav-bg);
+                backdrop-filter: blur(24px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+                transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+                box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+                border-left: 1px solid var(--glass-border);
+                padding: 2rem 1.5rem;
+                z-index: 1000;
+            }
+            .nav-menu.active {
+                right: 0;
+            }
+            .nav-menu li a {
+                font-size: 1.1rem;
+                display: block;
+                padding: 8px 0;
+            }
+            .theme-toggle {
+                margin-top: 20px;
+                justify-content: center;
+                width: 100%;
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 80px;
+            padding-bottom: 60px;
+        }
+
+        .dev-tag {
+            font-family: 'Fira Code', monospace;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
+            margin: 0;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--hero-name-start), var(--hero-name-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        h2.hero-sub {
+            font-size: clamp(1.3rem, 5vw, 2.4rem);
+            margin: 16px 0 20px 0;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--hero-sub-start), var(--hero-sub-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .description {
+            max-width: 580px;
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        /* ===== PRO BUTTONS STYLES ===== */
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        /* Base button style */
+        .pro-btn {
+            position: relative;
+            padding: 14px 32px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            overflow: hidden;
+            z-index: 1;
+            backdrop-filter: blur(4px);
+        }
+
+        .pro-btn i {
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        /* Primary Button (View Work) */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
+        }
+
+        .btn-primary:hover i {
+            transform: translateX(4px);
+        }
+
+        /* Outline Button (CV Preview) */
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(14, 165, 233, 0.08);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-outline:hover::after {
+            width: 100%;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-light);
+            color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline:hover i {
+            transform: scale(1.1);
+        }
+
+        /* Glass Button (Download CV) */
+        .btn-glass {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: var(--text);
+            backdrop-filter: blur(12px);
+        }
+
+        .btn-glass::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(14, 165, 233, 0.2);
+            transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-glass:hover::before {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+        }
+
+        .btn-glass:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-glass:hover i {
+            animation: bounce 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        /* Responsive buttons */
+        @media (max-width: 640px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                gap: 14px;
+            }
+            .pro-btn {
+                justify-content: center;
+                padding: 12px 24px;
+            }
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.8rem;
+            margin: 70px 0 40px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--card-title);
+            flex-wrap: wrap;
+        }
+
+        .section-title::after {
+            content: "";
+            height: 2px;
+            flex-grow: 1;
+            background: linear-gradient(90deg, var(--glass-border), transparent);
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
+
+        @media (max-width: 992px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .container {
+                padding: 0 20px;
+            }
+            .section-title {
+                margin-top: 50px;
+                font-size: 1.6rem;
+            }
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 24px;
+            border-radius: 24px;
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, border-color 0.2s, box-shadow 0.2s;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card h3 {
+            color: var(--card-title);
+            margin: 12px 0 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.25rem;
+        }
+
+        .feature-list {
+            margin: 16px 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0.75rem;
+            color: var(--primary);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+            flex-wrap: wrap;
+            padding-top: 18px;
+        }
+
+        .tech-tag {
+            font-size: 0.7rem;
+            font-family: 'Fira Code', monospace;
+            color: var(--primary);
+            background: rgba(14, 165, 233, 0.1);
+            padding: 4px 10px;
+            border-radius: 40px;
+            border: 1px solid rgba(14, 165, 233, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin: 28px 0 32px;
+        }
+
+        .social-links a {
+            color: var(--text);
+            font-size: 2rem;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        footer {
+            padding: 45px 0 35px;
+            text-align: center;
+            color: var(--text-muted);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 20px;
+        }
+
+        .highlight {
+            color: var(--primary);
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 24px;
+        }
+
+        @media (max-width: 540px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 80px;
+        }
+        .contact-content p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-
     <div class="bg-glow"></div>
 
     <nav>
         <div class="container">
             <a href="#" class="logo">M.Hayajneh</a>
-            <ul class="nav-menu">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="#about"><span class="highlight">01.</span> About</a></li>
                 <li><a href="#projects"><span class="highlight">02.</span> Work</a></li>
                 <li><a href="#skills"><span class="highlight">03.</span> Skills</a></li>
@@ -101,40 +588,56 @@
             <h1>Mohammad Khaled <span class="highlight">Hayajneh.</span></h1>
             <h2 class="hero-sub">I build intelligent digital solutions.</h2>
             <p class="description">I'm a <span class="highlight">Web Developer</span> specializing in AI-driven applications. Currently focused on bridging the gap between data science and user-centric software.</p>
-            <a href="#projects" class="btn">View My Work</a>
+            <div class="hero-buttons">
+                <!-- زر View Work - أنيق مع تأثير انزلاق -->
+                <a href="#projects" class="pro-btn btn-primary">
+                    <i class="fas fa-arrow-right"></i>
+                    <span>View My Work</span>
+                </a>
+                <!-- زر عرض CV - تصميم شفاف مع تأثير تمرير أنيق -->
+                <a href="https://drive.google.com/file/d/1S-yHEI4q7A3vSEJXEyFBOl8kADlz3BlV/preview" target="_blank" class="pro-btn btn-outline" rel="noopener noreferrer">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>معاينة CV</span>
+                </a>
+                <!-- زر تحميل CV - تصميم زجاجي مع تأثير نابض -->
+                <a href="https://drive.google.com/uc?export=download&id=1S-yHEI4q7A3vSEJXEyFBOl8kADlz3BlV" class="pro-btn btn-glass" download>
+                    <i class="fas fa-download"></i>
+                    <span>تحميل CV</span>
+                </a>
+            </div>
         </header>
 
         <section id="projects">
             <h2 class="section-title"><span class="highlight">01.</span> Featured Projects</h2>
             <div class="grid">
                 <div class="card">
-                    <div class="dev-tag" style="font-size: 0.75rem;">Graduation Project</div>
+                    <div class="dev-tag" style="font-size: 0.7rem;">Graduation Project</div>
                     <h3>Spam Detection System</h3>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin: 0;">An intelligent classification engine built with NLP to detect fraudulent content. It features a real-time inference pipeline and data visualization dashboard.</p>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin: 0;">Intelligent NLP classifier to detect fraudulent messages with real-time inference & dashboard.</p>
                     <ul class="feature-list"><li>▹ TF-IDF Analysis</li><li>▹ Real-time API</li><li>▹ High Precision</li><li>▹ Data Visuals</li></ul>
                     <div class="tech-stack"><span class="tech-tag">Python</span><span class="tech-tag">Flask</span><span class="tech-tag">Scikit-learn</span></div>
                     <a href="https://spam-detection-ai-syw5.onrender.com" target="_blank" style="margin-top:15px; color:var(--primary); text-decoration:none; font-size:0.75rem; font-family:'Fira Code';">Live Demo →</a>
                 </div>
                 <div class="card">
-                    <div class="dev-tag" style="font-size: 0.75rem;">AI Enterprise Solution</div>
+                    <div class="dev-tag" style="font-size: 0.7rem;">AI Enterprise Solution</div>
                     <h3>ATS AI Enterprise System</h3>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin: 0;">An advanced AI-driven candidate screening platform designed to streamline recruitment. It utilizes semantic similarity algorithms to match resumes against job descriptions with high-precision scoring.</p>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin: 0;">Semantic candidate screening platform with resume scoring & real-time job matching.</p>
                     <ul class="feature-list"><li>▹ Semantic Matching</li><li>▹ Keyword Analysis</li><li>▹ Resume Scoring</li><li>▹ Enterprise UI</li></ul>
                     <div class="tech-stack"><span class="tech-tag">Streamlit</span><span class="tech-tag">Scikit-learn</span><span class="tech-tag">NLP</span><span class="tech-tag">Python</span></div>
                     <a href="https://cv-checker-system-hdx6bmhwbenibcu3zj4q43.streamlit.app/" target="_blank" style="margin-top:15px; color:var(--primary); text-decoration:none; font-size:0.75rem; font-family:'Fira Code';">Live Demo →</a>
                 </div>
                 <div class="card">
-                    <div class="dev-tag" style="font-size: 0.75rem;">Web Application</div>
+                    <div class="dev-tag" style="font-size: 0.7rem;">Web Application</div>
                     <h3>SkyPulse Ultra</h3>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin: 0;">An advanced responsive weather dashboard integrated with live API endpoints to fetch accurate real-time atmospheric data.</p>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin: 0;">Real-time weather dashboard with live API integration, dynamic charts and local storage.</p>
                     <ul class="feature-list"><li>▹ Real-time API</li><li>▹ Dynamic UI</li><li>▹ Chart.js</li><li>▹ LocalStorage</li></ul>
                     <div class="tech-stack"><span class="tech-tag">JavaScript</span><span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span></div>
                     <a href="https://mohamedkh199.github.io/SkyPulse-Ultra/" target="_blank" style="margin-top:15px; color:var(--primary); text-decoration:none; font-size:0.75rem; font-family:'Fira Code';">Live Demo →</a>
                 </div>
                 <div class="card">
-                    <div class="dev-tag" style="font-size: 0.75rem;">Landing Page</div>
+                    <div class="dev-tag" style="font-size: 0.7rem;">Landing Page</div>
                     <h3>Neurowrite AI</h3>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin: 0;">A high-end SaaS landing page designed with a "Modern Enterprise" aesthetic, focused on minimalist UI and responsive performance.</p>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin: 0;">Premium SaaS landing page with modern enterprise aesthetic, fully responsive.</p>
                     <ul class="feature-list"><li>▹ Indigo Design</li><li>▹ Responsive</li><li>▹ SEO Optimized</li><li>▹ Clean Code</li></ul>
                     <div class="tech-stack"><span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">JavaScript</span></div>
                     <a href="https://neurowrite-landing-page.vercel.app" target="_blank" style="margin-top:15px; color:var(--primary); text-decoration:none; font-size:0.75rem; font-family:'Fira Code';">Live Demo →</a>
@@ -144,29 +647,49 @@
 
         <section id="skills">
             <h2 class="section-title"><span class="highlight">02.</span> Technical Skills</h2>
-            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                <div class="card" style="padding: 20px; text-align: center;"><h4 style="color: var(--primary); margin: 0 0 10px;">Languages</h4><p style="font-size: 0.8rem; margin: 0;">Python, C++, SQL, HTML, CSS</p></div>
-                <div class="card" style="padding: 20px; text-align: center;"><h4 style="color: var(--primary); margin: 0 0 10px;">Tools</h4><p style="font-size: 0.8rem; margin: 0;">Git, GitHub, VS Code, CSV</p></div>
-                <div class="card" style="padding: 20px; text-align: center;"><h4 style="color: var(--primary); margin: 0 0 10px;">Frameworks & AI</h4><p style="font-size: 0.8rem; margin: 0;">Flask, Streamlit, Scikit-learn, NLP</p></div>
+            <div class="skills-grid">
+                <div class="card" style="padding: 22px; text-align: center;"><h4 style="color: var(--primary); margin: 0 0 12px;">Languages</h4><p style="font-size: 0.85rem; margin: 0;">Python, C++, SQL, HTML, CSS, JS</p></div>
+                <div class="card" style="padding: 22px; text-align: center;"><h4 style="color: var(--primary); margin: 0 0 12px;">Tools & DevOps</h4><p style="font-size: 0.85rem; margin: 0;">Git, GitHub, VS Code, REST APIs</p></div>
+                <div class="card" style="padding: 22px; text-align: center;"><h4 style="color: var(--primary); margin: 0 0 12px;">Frameworks & AI</h4><p style="font-size: 0.85rem; margin: 0;">Flask, Streamlit, Scikit-learn, NLP, Pandas</p></div>
             </div>
         </section>
 
         <section id="contact">
             <h2 class="section-title"><span class="highlight">03.</span> Get In Touch</h2>
-            <div class="contact-content" style="text-align:center; max-width:700px; margin: 0 auto 80px;">
+            <div class="contact-content">
                 <p style="color: var(--text-muted);">I'm currently looking for new opportunities in Web Development or AI Engineering. My inbox is always open!</p>
-                <div class="social-links"><a href="mailto:hayajnehmohammad974@gmail.com"><i class="fas fa-envelope"></i></a><a href="https://github.com/Mohamedkh199" target="_blank"><i class="fab fa-github"></i></a><a href="https://www.linkedin.com/in/mohammadkhhayajneh/" target="_blank"><i class="fab fa-linkedin"></i></a></div>
-                <a href="mailto:hayajnehmohammad974@gmail.com" class="btn">Say Hello</a>
+                <div class="social-links">
+                    <a href="mailto:hayajnehmohammad974@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/Mohamedkh199" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/mohammadkhhayajneh/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <a href="mailto:hayajnehmohammad974@gmail.com" class="pro-btn btn-outline" style="margin-top: 10px;">Say Hello</a>
             </div>
         </section>
 
-        <footer>Built by Mohammad Khaled Hayajneh &copy; 2026</footer>
+        <footer>Built by Mohammad Khaled Hayajneh &copy; 2026 — AI-Driven Craft</footer>
     </div>
 
     <script>
         const themeBtn = document.getElementById('themeBtn');
         const themeIcon = document.getElementById('themeIcon');
-        themeBtn.addEventListener('click', () => {
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        function closeSidebarIfOpen() {
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                const icon = hamburgerBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+                document.body.style.overflow = '';
+            }
+        }
+
+        function toggleThemeAndCloseMenu() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             if (currentTheme === 'light') {
                 document.documentElement.removeAttribute('data-theme');
@@ -175,7 +698,79 @@
                 document.documentElement.setAttribute('data-theme', 'light');
                 themeIcon.className = 'fas fa-sun';
             }
+            closeSidebarIfOpen();
+        }
+
+        themeBtn.addEventListener('click', toggleThemeAndCloseMenu);
+
+        function toggleMenu() {
+            navMenu.classList.toggle('active');
+            const icon = hamburgerBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden';
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeMenu() {
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
+        }
+
+        hamburgerBtn.addEventListener('click', toggleMenu);
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) closeMenu();
+                const targetId = link.getAttribute('href');
+                if (targetId && targetId !== '#') {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
         });
+
+        document.addEventListener('click', function(event) {
+            const isInsideNav = navMenu.contains(event.target) || hamburgerBtn.contains(event.target);
+            if (!isInsideNav && navMenu.classList.contains('active') && window.innerWidth <= 768) closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && navMenu.classList.contains('active')) closeMenu();
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const hash = this.getAttribute('href');
+                if (hash === "#" || hash === "") return;
+                const target = document.querySelector(hash);
+                if (target) {
+                    e.preventDefault();
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                    history.pushState(null, null, hash);
+                }
+            });
+        });
+
+        if (document.documentElement.getAttribute('data-theme') === 'light') {
+            themeIcon.className = 'fas fa-sun';
+        } else {
+            themeIcon.className = 'fas fa-moon';
+        }
     </script>
 </body>
 </html>
